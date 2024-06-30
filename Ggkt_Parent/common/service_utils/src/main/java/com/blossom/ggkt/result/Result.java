@@ -1,0 +1,56 @@
+package com.blossom.ggkt.result;
+
+import lombok.Data;
+
+
+//统一返回结果
+@Data
+public class Result <T>{
+
+    private Integer code;//状态码
+
+    private String message;//返回状态信息（成功/失败）
+
+    private T data;//返回数据
+
+    public Result(){}
+
+    public static <T> Result<T> build(T data, Integer code, String message) {
+        Result<T> result = new Result<T>();
+        if (data != null) {
+            result.setData(data);
+        }
+        result.setCode(code);
+        result.setMessage(message);
+        return result;
+    }
+
+    /**
+     * 设置默认返回结果(操作成功)
+     */
+    public static <T> Result<T> ok(T data){
+        return build(data,20000,"成功");
+    }
+
+    /**
+     * 设置默认返回结果(操作失败)
+     */
+    public static <T> Result<T> fail(T data){
+        return build(data,20001,"失败");
+    }
+
+
+    /**
+     * 自定义返回结果
+     * @param msg
+     * @return
+     */
+    public Result<T> message(String msg){
+        this.setMessage(msg);
+        return this;
+    }
+    public Result<T> code(Integer code){
+        this.setCode(code);
+        return this;
+    }
+}

@@ -1,0 +1,39 @@
+# 服务端口
+server:
+    port: 8333
+spring:
+    # 服务名
+    application:
+        name: service-gateway
+    cloud:
+        gateway:
+            #使用服务发现路由
+            discovery:
+                locator:
+                    enabled: true
+            #service-vod/service-order/service-user等模块的配置-->设置路由id
+            #设置路由的uri(lb为load balance负载均衡)
+            #设置路由断言,当路径中包含相应条件时就会去注册中心寻找对应名字的服务
+            routes:
+                - id: service-vod
+                  uri: lb://service-vod
+                  predicates: Path=/*/vod/**
+                - id: service-order
+                  uri: lb://service-order
+                  predicates: Path=/*/order/**
+                - id: service-user
+                  uri: lb://service-user
+                  predicates: Path=/*/user/**
+                - id: service-activity
+                  uri: lb://service-activity
+                  predicates: Path=/*/activity/**
+                - id: service-wechat
+                  uri: lb://service-wechat
+                  predicates: Path=/*/wechat/**
+                - id: service-live
+                  uri: lb://service-live
+                  predicates: Path=/*/live/**
+        # nacos服务地址
+        nacos:
+            discovery:
+                server-addr: 127.0.0.1:8848

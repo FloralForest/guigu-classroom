@@ -1,0 +1,53 @@
+# 服务端口
+server:
+    port: 8301
+
+# 服务名
+spring:
+    application:
+        name: service-vod
+    #腾讯云对象存储
+    servlet:
+        multipart:
+            max-file-size: 7168MB
+            max-request-size: 7168MB
+    # nacos服务地址
+    cloud:
+        nacos:
+            discovery:
+                server-addr: 127.0.0.1:8848
+
+    # 环境设置：dev、test、prod
+    profiles:
+        active: dev
+
+    # mysql数据库连接
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/glkt_vod?characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+        username: root
+        password: root
+
+    #返回json的全局时间格式
+    jackson:
+        date-format: yyyy-MM-dd HH:mm:ss
+        time-zone: GMT+8
+
+#不同的服务器，地址不同 传入secretId和secretKey
+tencent:
+    cos:
+        file:
+            region: ap-nanjing
+            #传入secretId和secretKey
+            #bucket可以在控制台创建，也可以使用java代码创建
+            bucketName: 你的仓库
+    #腾讯云点播应用id
+    video:
+        appid: 你的id
+
+#mybatis日志
+mybatis-plus:
+    configuration:
+        log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    mapper-locations: classpath:com/blossom/ggkt/vod/mapper/xml/*.xml #课程发布(根据id获取课程发布信息)
+  

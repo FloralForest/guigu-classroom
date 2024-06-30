@@ -1,0 +1,48 @@
+#mybatis日志
+mybatis-plus:
+    configuration:
+        log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    mapper-locations: classpath:com/blossom/ggkt/user/mapper/xml/*.xml
+# 服务端口
+server:
+    port: 8304
+
+spring:
+    # 服务名
+    application:
+        name: service-user
+    # nacos服务地址
+    cloud:
+        nacos:
+            discovery:
+                server-addr: 127.0.0.1:8848
+    # mysql数据库连接
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/glkt_user?characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+        password: root
+        username: root
+    #返回json的全局时间格式
+    jackson:
+        date-format: yyyy-MM-dd HH:mm:ss
+        time-zone: GMT+8
+    # 环境设置：dev、test、prod
+    profiles:
+        active: dev
+#公众号id和秘钥
+
+wechat:
+## 硅谷课堂微信公众平台appId
+#    mpAppId: wx09f201e9013e81d8
+## 硅谷课堂微信公众平台api秘钥
+#    wechatmpAppSecret: 6c999765c12c51850d28055e8b6e2eda
+# 我的订阅号
+    mpAppId: wx1fab4e306bed9d96
+# 我的订阅号
+    wechatmpAppSecret: 67e533f1219a6104004605780b392a05
+##ggkt正式号的参数
+#    mpAppId: wxf913bfa3a2c7eeeb
+#    ## 硅谷课堂微信公众平台api秘钥
+#    wechatmpAppSecret: cd360d429e5c8db0c638d5ef9df74f6d
+# 授权回调获取用户信息接口地址
+    userInfoUrl: http://ggkt2flfo.v5.idcfengye.com/api/user/wechat/userInfo
